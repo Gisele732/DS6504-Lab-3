@@ -105,13 +105,13 @@ SET Stock = (CASE WHEN ProductName = 'Cola' THEN 1
 -- Calculate total stock value by category
 -- start by calculating stock value for each product
 SELECT CategoryName, ProductName, 
-	 ProductPrice * Stock AS 'Stock Value'
+	 FORMAT((ProductPrice * Stock), 'C')  AS 'Stock Value'
 FROM Products
 JOIN Category ON Category.CategoryID = Products.ProductCategoryID;
 
 -- Sum the values and group by categories
 SELECT CategoryName,
-	SUM(ProductPrice * Stock) as 'Category Stock Value'
+	FORMAT(SUM(ProductPrice * Stock), 'C') as 'Category Stock Value'
 FROM Products
 JOIN Category ON Category.CategoryID = Products.ProductCategoryID
 GROUP BY CategoryName;
